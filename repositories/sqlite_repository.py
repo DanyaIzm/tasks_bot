@@ -105,6 +105,7 @@ class SqliteTaskRepository:
 
     def update(self, task: Task) -> None:
         cursor = self._connection.cursor()
+        # VERY BAD
         cursor.execute(
             "UPDATE task SET user_id = ?, name = ?, description = ?, is_completed = ? WHERE id = ?",
             (task.user_id, task.name, task.description, task.is_completed, task.id),
@@ -113,5 +114,6 @@ class SqliteTaskRepository:
 
     def delete_completed(self) -> None:
         cursor = self._connection.cursor()
+        # VERY BAD
         cursor.execute("DELETE FROM task WHERE is_completed = 1")
         self._connection.commit()
